@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloomingdale Roses Kenya</title>
+<meta name="description" content="Bloomingdale Roses — premium cut roses grown in the Kenyan highlands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ---------- Tokens ---------- */
+:root{
+  --ink:#1f1618;
+  --rose:#6a1f33;        /* deep stem burgundy */
+  --rose-soft:#a8486a;
+  --blush:#f3e4e2;
+  --paper:#faf6f2;
+  --leaf:#4a6238;        /* highland green */
+  --mist:#e9ecea;
+  --line:rgba(31,22,24,.14);
+  --display:'Cormorant Garamond', Georgia, serif;
+  --head:'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+  --body:'Manrope', system-ui, sans-serif;
+  --gutter:clamp(20px, 5vw, 72px);
+  --measure:62ch;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.6;font-weight:400;font-size:17px;-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.05;letter-spacing:.01em}
+h2{font-size:clamp(40px,5vw,66px);color:var(--rose)}
+p{max-width:var(--measure)}
+:focus-visible{outline:2px solid var(--rose);outline-offset:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- Placeholder image blocks (replace with real photos) ---------- */
+.ph{position:relative;overflow:hidden;background:
+   repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 2px,transparent 2px 14px),
+   linear-gradient(160deg,#5c2a3a,#8a3d55 45%,#3f5431);
+   color:#fff}
+.ph::after{content:attr(data-label);position:absolute;inset:auto 0 0 0;padding:10px 14px;font:500 11px/1.4 var(--body);letter-spacing:.14em;text-transform:uppercase;background:rgba(0,0,0,.35);backdrop-filter:blur(4px)}
+.ph.cutout{background:none;color:var(--rose)}
+.ph.cutout::after{background:none;color:var(--rose);opacity:.6}
+/* ---------- Rose cursor — real rose photos, bud → full bloom as you scroll (desktop only; hidden on touch) ---------- */
+.rose-cursor{display:none}
+@media (hover:hover) and (pointer:fine){
+  body,a,button,select,input,textarea,label,.rail{cursor:none}
+  .rose-cursor{display:block}
+  .rose-cursor{position:fixed;left:0;top:0;width:56px;height:56px;margin:-34px 0 0 -22px;pointer-events:none;z-index:9999;will-change:transform;opacity:0;transition:opacity .25s;contain:layout style paint}
+  .rose-cursor.on{opacity:1}
+  .rose-cursor img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:translateZ(0);will-change:opacity}
+  .rose-cursor.link{transform-origin:50% 60%}
+  .rose-cursor.link .frames{transform:scale(1.25);transition:transform .25s}
+  .rose-cursor .frames{position:absolute;inset:0;transform-origin:50% 60%;transition:transform .25s}
+}
+
+/* ---------- Header ---------- */
+.site-head{position:fixed;inset:0 0 auto 0;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px var(--gutter);color:#fff;mix-blend-mode:normal;transition:background .4s,color .4s,padding .4s}
+.site-head.solid{background:rgba(250,246,242,.92);backdrop-filter:blur(10px);color:var(--ink);padding:14px var(--gutter);border-bottom:1px solid var(--line)}
+.head-left,.head-right{display:flex;align-items:center;gap:26px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500}
+.head-right{justify-content:flex-end}
+.head-right a{text-decoration:none}
+.menu-btn{background:none;border:0;color:inherit;font:inherit;cursor:pointer;display:flex;align-items:center;gap:10px;letter-spacing:inherit;text-transform:inherit}
+.menu-btn .bars{width:18px;height:11px;position:relative}
+.menu-btn .bars::before,.menu-btn .bars::after{content:"";position:absolute;left:0;right:0;height:1.5px;background:currentColor;transition:transform .3s}
+.menu-btn .bars::before{top:0}.menu-btn .bars::after{bottom:0}
+.menu-btn[aria-expanded="true"] .bars::before{transform:translateY(4.75px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] .bars::after{transform:translateY(-4.75px) rotate(-45deg)}
+.lang{position:relative}
+.lang-btn{background:none;border:0;color:inherit;font:inherit;cursor:pointer;letter-spacing:inherit;text-transform:inherit;display:flex;align-items:center;gap:6px}
+.lang-btn::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+.lang-list{position:absolute;top:calc(100% + 12px);left:-10px;min-width:150px;background:var(--paper);color:var(--ink);border:1px solid var(--line);padding:6px;display:none;text-transform:none;letter-spacing:.02em;font-size:14px;list-style:none;box-shadow:0 14px 40px rgba(31,22,24,.12)}
+.lang-list.open{display:block}
+.lang-list button{width:100%;text-align:left;background:none;border:0;padding:10px 12px;font:inherit;cursor:pointer;color:inherit}
+.lang-list button:hover,.lang-list button[aria-current="true"]{background:var(--blush);color:var(--rose)}
+.logo{display:block;height:64px}
+.logo img{height:100%;width:auto}
+.site-head.solid .logo{height:48px}
+.site-head.solid .logo img{filter:brightness(.35) sepia(1) hue-rotate(300deg) saturate(3)}
+
+/* Full menu overlay */
+.menu{position:fixed;inset:0;z-index:40;background:var(--rose);color:var(--blush);display:grid;place-items:center;transform:translateY(-100%);transition:transform .6s cubic-bezier(.77,0,.18,1);visibility:hidden}
+.menu.open{transform:none;visibility:visible}
+.menu ul{list-style:none;text-align:center}
+.menu li{font-family:var(--display);font-size:clamp(28px,4.6vw,56px);line-height:1.3}
+.menu a{text-decoration:none;transition:opacity .2s}
+.menu a:hover{opacity:.6;font-style:italic}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;height:100svh;min-height:620px;overflow:hidden;color:#fff;background:#2a1a1f}
+.hero-media{position:absolute;inset:0}
+.hero-media .ph{height:100%;background:linear-gradient(to bottom,rgba(0,0,0,.25),rgba(0,0,0,0) 40%,rgba(42,26,31,.55)),
+  repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 16px),
+  linear-gradient(170deg,#7d8a6b 0%,#4a6238 35%,#6a1f33 100%)}
+.hero-media .ph::after{inset:auto auto 50% 50%;transform:translate(-50%,50%);background:rgba(0,0,0,.35);padding:14px 20px}
+.hero-media video,.hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+.hero-shade{position:absolute;inset:0;background:
+  linear-gradient(to bottom,rgba(20,12,16,.42) 0%,rgba(20,12,16,0) 32%),
+  linear-gradient(to top,rgba(31,22,24,.78) 0%,rgba(31,22,24,.35) 26%,rgba(31,22,24,0) 55%)}
+.hero-name{text-shadow:0 2px 30px rgba(0,0,0,.25)}
+.hero-tag{position:absolute;left:var(--gutter);top:34vh;text-align:left;font-size:12px;letter-spacing:.2em;text-transform:uppercase;line-height:1.9;font-weight:500}
+.hero-name{position:absolute;left:0;right:0;bottom:clamp(22px,2.6vw,40px);padding:0 2vw;font-family:var(--display);font-weight:300;letter-spacing:.02em;line-height:.95;text-align:center;white-space:nowrap;font-size:clamp(56px,12.8vw,240px);color:var(--paper)}
+.hero-name small{display:block;font-family:var(--body);font-weight:500;font-size:clamp(10px,.9vw,14px);letter-spacing:.42em;text-transform:uppercase;margin-top:.9em;opacity:.9}
+.scroll-cue{position:absolute;left:var(--gutter);bottom:36px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.scroll-cue::after{content:"";width:1px;height:46px;background:currentColor;animation:cue 2.2s ease-in-out infinite;transform-origin:top}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* Section headings — Hillbrook style: upright first word, italic emphasis */
+.farm .copy h2,.flower .copy h2,.people .copy h2,.quote-text h2,.fleet h2{font-family:var(--head);font-weight:400;font-size:clamp(40px,4.4vw,64px);line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.fleet h2{color:#fff}
+.quote-text h2{color:var(--rose)}
+h2 em{font-style:italic;font-weight:400;letter-spacing:-.01em}
+
+/* ---------- Generic section ---------- */
+.section{padding:clamp(80px,10vw,150px) var(--gutter)}
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,96px);align-items:center}
+.split .copy{display:flex;flex-direction:column;gap:28px}
+.split .copy h2{margin-bottom:6px}
+.split .copy p{font-family:var(--display);font-size:22px;line-height:1.55;color:#3a2b2f}
+.split .copy p + p{margin-top:-10px}
+.split .art{aspect-ratio:4/5;max-height:640px}
+.link{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--rose);text-decoration:none;align-self:flex-start;border-bottom:1px solid transparent;transition:border-color .2s}
+.link:hover{border-color:var(--rose)}
+.link svg{width:14px;height:14px}
+
+/* Farm / Flower — heading + copy on one side, illustration on the other */
+.farm,.flower,.people{background:#fff}
+.flower .split{grid-template-columns:2fr 3fr;align-items:center;gap:clamp(32px,5vw,80px)}
+.flower .art{order:-1;display:flex;justify-content:center}
+.flower .art img{width:auto;max-width:100%;max-height:440px}
+.farm .split,.people .split{grid-template-columns:2fr 3fr;align-items:center;gap:clamp(32px,5vw,80px)}
+.farm .copy,.flower .copy,.people .copy{gap:18px}
+.farm .copy h2,.flower .copy h2,.people .copy h2{font-size:clamp(36px,3.6vw,52px);line-height:1.1;color:var(--ink);margin-bottom:8px}
+.farm .copy p,.flower .copy p,.people .copy p{font-family:var(--body);font-size:17px;line-height:1.7;color:#3a2b2f}
+.farm .copy p + p,.flower .copy p + p,.people .copy p + p{margin-top:0}
+.farm .art,.flower .art,.people .art{aspect-ratio:auto;max-height:none;width:100%}
+.farm .art img,.flower .art img,.people .art img{width:100%;height:auto}
+
+/* ---------- Card sliders (Who we are, Varieties) ---------- */
+.slider{padding:40px 0 40px;background:var(--blush);overflow:hidden}
+.slider header{text-align:center;margin-bottom:28px;padding:0 var(--gutter)}
+.slider header h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,3.6vw,52px);color:var(--ink);letter-spacing:.01em}
+.hint{display:inline-flex;align-items:center;gap:14px;margin-top:6px;font-size:15px;font-weight:600;color:var(--rose)}
+.hint::before,.hint::after{content:"";width:46px;height:12px;background:currentColor;
+  -webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 12" fill="none" stroke="black" stroke-width="1.6"><path d="M0 6h44M39 1l5 5-5 5"/></svg>') no-repeat center/contain;
+          mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 12" fill="none" stroke="black" stroke-width="1.6"><path d="M0 6h44M39 1l5 5-5 5"/></svg>') no-repeat center/contain}
+.hint::before{transform:scaleX(-1)}
+.rail{display:flex;gap:40px;overflow-x:auto;padding:0 var(--gutter) 70px;scroll-snap-type:x mandatory;scroll-padding-left:var(--gutter);scrollbar-width:none;cursor:grab;align-items:flex-start}
+.rail::-webkit-scrollbar{display:none}
+.rail.dragging{cursor:grabbing;scroll-snap-type:none}
+.card{flex:0 0 clamp(280px,24vw,372px);height:clamp(380px,32vw,470px);scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border-radius:28px;overflow:hidden;text-decoration:none;color:var(--ink);position:relative;box-shadow:0 10px 30px rgba(31,22,24,.06)}
+.card{will-change:transform}
+.card p{padding:24px 26px 20px;font-size:16px;line-height:1.55;font-weight:500;max-width:none;color:var(--ink)}
+.card figure{flex:1;position:relative;margin:0;background:
+  repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 2px,transparent 2px 14px),
+  linear-gradient(160deg,#5c2a3a,#8a3d55 50%,#3f5431)}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card figcaption{position:absolute;left:50%;bottom:0;transform:translateX(-50%);max-width:92%;background:var(--rose);color:#fff;padding:8px 20px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;text-align:center;border-radius:4px 4px 0 0}
+
+.slider.news{background:var(--paper)}
+
+/* ---------- Testimonial — quote left, cut-out portrait right ---------- */
+.testimonial{background:var(--rose);color:var(--paper);padding:clamp(56px,6vw,90px) var(--gutter) 0;overflow:hidden}
+.testimonial .inner{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end;max-width:1240px;margin:0 auto}
+.testimonial .quote-mark{font-family:var(--display);font-size:120px;line-height:.6;color:rgba(243,228,226,.35);display:block;margin-bottom:28px}
+.testimonial blockquote{padding-bottom:clamp(56px,6vw,90px)}
+.testimonial blockquote p{font-family:var(--body);font-weight:600;font-size:clamp(19px,1.6vw,24px);line-height:1.6;max-width:30em;color:#fff}
+.testimonial cite{display:block;font-style:normal;margin-top:36px}
+.testimonial cite b{display:block;font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.testimonial cite span{font-size:14px;color:var(--blush)}
+.testimonial .portrait{align-self:end;display:flex;justify-content:center}
+.testimonial .portrait img{width:100%;max-width:420px;height:auto;display:block}
+
+/* ---------- Globe + stats (scroll-driven) ---------- */
+.globe-sec{position:relative;height:200vh;background:#f4f3f1}
+.globe-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:center}
+.globe{position:absolute;left:50%;top:50%;width:min(92vmin,1000px);aspect-ratio:1;transform:translate3d(-50%,calc(-50% + var(--gy,60%)),0);will-change:transform;backface-visibility:hidden}
+.globe-fallback{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 38% 32%,#fff,#d9d9d9 60%,#9c9c9c)}
+.globe img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transform:translateZ(0)}
+.tracks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.tracks path{fill:none;stroke:#c0392b;stroke-width:.28;stroke-dasharray:.9 1.1;opacity:.9}
+.tracks path,.tracks circle:not(.hub),.tracks text{opacity:clamp(0,calc((var(--gp,0) - var(--d,0)) * 4),1)}
+.tracks circle{fill:#c0392b}
+.tracks circle.hub{fill:#6a1f33}
+.tracks text{font:500 2.1px var(--body);fill:#6a1f33;letter-spacing:.02em}
+.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,auto);gap:22px clamp(28px,4vw,64px);text-align:center;padding:0 var(--gutter)}
+.stats div{position:relative}
+.stats div:not(:nth-child(3n+1))::before{content:"";position:absolute;left:calc(-1 * clamp(14px,2vw,32px));top:12%;height:76%;width:1px;background:rgba(31,22,24,.35)}
+.stats strong{display:block;font-family:var(--body);font-weight:300;font-size:clamp(26px,3vw,44px);line-height:1;letter-spacing:-.02em;color:var(--ink)}
+.stats span{display:block;margin-top:8px;font-size:14px;color:#3a2b2f}
+@media (max-width:700px){.stats{grid-template-columns:1fr 1fr}.stats div:not(:nth-child(3n+1))::before{display:none}.stats div:nth-child(even)::before{display:block;content:"";position:absolute;left:-14px;top:12%;height:76%;width:1px;background:rgba(31,22,24,.35)}.globe{width:150vw}}
+
+/* ---------- Farm to flight — cold-chain timeline ---------- */
+.fleet{background:var(--ink);color:var(--paper);padding:clamp(50px,6vw,90px) var(--gutter)}
+.fleet h2{font-family:var(--body);font-weight:700;font-size:clamp(30px,3vw,40px);color:#fff;letter-spacing:-.01em;text-align:left}
+.fleet .sub{text-align:center;margin:10px auto 0;font-size:15px;color:#b9abae;max-width:48ch}
+.chain{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:clamp(36px,4vw,60px);border-top:1px solid rgba(250,246,242,.18)}
+.chain li{padding:28px 20px 0 0;border-right:1px solid rgba(250,246,242,.12);position:relative}
+.chain li:last-child{border-right:0}
+.chain li::before{content:"";position:absolute;top:-1px;left:0;width:32px;height:1px;background:var(--rose-soft)}
+.chain time{font-family:var(--body);font-weight:300;font-size:clamp(36px,3.6vw,56px);line-height:1;display:block;color:#fff;margin-bottom:12px;font-variant-numeric:tabular-nums}
+.chain time small{font-size:.5em;color:var(--blush);margin-left:.1em}
+.chain h3{font-family:var(--body);font-size:14px;font-weight:600;letter-spacing:.04em;margin-bottom:8px;color:var(--paper)}
+.chain p{font-size:14px;color:#b9abae;line-height:1.55}
+
+/* ---------- Quote ---------- */
+.quote{position:relative;min-height:clamp(300px,34vw,520px);background:url("assets/quote-bg.png") center 40% / cover no-repeat;display:flex;align-items:flex-start;justify-content:flex-end;padding:clamp(48px,7vw,120px) var(--gutter) clamp(40px,5vw,80px)}
+.quote-text{max-width:30ch;text-align:right}
+.quote-text h2{font-family:var(--display);font-weight:400;font-size:clamp(36px,3.6vw,52px);line-height:1.1;letter-spacing:.01em;color:var(--rose);text-shadow:0 1px 0 rgba(255,255,255,.6)}
+.quote-text p{margin-top:12px;font-size:clamp(15px,1.2vw,18px);line-height:1.5;color:var(--rose);font-weight:500;text-shadow:0 1px 0 rgba(255,255,255,.6)}
+
+/* ---------- Contact — truck photo as full background, content over the right side ---------- */
+.contact{position:relative;background:#fff url("assets/truck.png") left center / contain no-repeat;min-height:min(70vh,640px);padding-top:clamp(48px,5vw,72px);padding-bottom:clamp(48px,5vw,72px);display:flex;align-items:center;justify-content:flex-end}
+.contact .panel{width:min(100%,560px);margin-right:clamp(0px,6vw,120px);display:flex;flex-direction:column;gap:12px}
+.contact .panel h2{font-size:clamp(32px,3vw,44px);color:var(--ink);margin-bottom:0}
+.contact form{gap:12px}
+.contact input,.contact select{padding:11px 14px}
+.contact textarea{min-height:100px}
+.contact .panel p{font-family:var(--body);font-size:16px;color:#5a4247}
+.contact address{font-style:normal;font-size:15px;line-height:1.9;color:#3a2b2f}
+.contact address a{text-decoration:none;border-bottom:1px solid var(--line)}
+.contact form{margin-top:8px}
+.contact input,.contact select,.contact textarea{background:#fff}
+.contact .panel h2,.contact .panel p,.contact address{text-shadow:0 0 6px #fff,0 0 12px #fff,0 0 18px #fff}
+form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+label{font-size:12px;letter-spacing:.08em;color:#5a4247}
+input,select,textarea{font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:4px;padding:14px 16px;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--rose);outline:none}
+textarea{min-height:140px;resize:vertical}
+.btn{grid-column:1/-1;justify-self:start;background:var(--rose);color:#fff;border:0;border-radius:999px;padding:16px 34px;font:600 13px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.btn:hover{background:#4e1626}
+.fine{grid-column:1/-1;font-size:12px;color:#8a7478}
+
+/* ---------- Footer — watercolour landscape, name top-left, social top-right, giant wordmark at the bottom ---------- */
+.site-foot{position:relative;overflow:hidden;color:#fff;min-height:min(60vh,560px);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(28px,3vw,44px) var(--gutter) 0;
+  background:linear-gradient(180deg,#3f1220 0%,var(--rose) 60%,#7d2742 100%)}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.foot-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#fff}
+.foot-brand img{height:38px;width:auto;display:block}
+.foot-brand span{font-family:var(--display);font-size:clamp(18px,1.5vw,22px);letter-spacing:.04em}
+.foot-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px;font-size:13px;color:var(--blush)}
+.foot-social{display:flex;gap:14px}
+.foot-social a{display:block;width:18px;height:18px;color:#fff}
+.foot-social svg{width:100%;height:100%;fill:currentColor}
+.foot-contact{text-align:right;line-height:1.8}
+.foot-contact a{text-decoration:none}
+.foot-lang{position:relative;width:150px}
+.foot-lang select{width:100%;appearance:none;-webkit-appearance:none;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:7px 32px 7px 12px;font:inherit;font-size:13px;cursor:pointer;text-shadow:none}
+.foot-lang select option{color:var(--ink)}
+.foot-lang::after{content:"";position:absolute;right:12px;top:50%;width:6px;height:6px;border-right:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.foot-name{position:relative;margin:clamp(40px,5vw,80px) 0 0;padding:0 0 clamp(16px,2vw,28px);font-family:var(--display);font-weight:400;font-size:clamp(64px,13.6vw,260px);line-height:1;letter-spacing:-.01em;white-space:nowrap;text-align:left;color:rgba(243,228,226,.96);user-select:none}
+.foot-name small{display:block;font-family:var(--body);font-weight:500;font-size:clamp(11px,.9vw,14px);letter-spacing:.42em;text-transform:uppercase;margin-top:.5em;opacity:.85}
+.foot-left{display:flex;flex-direction:column;gap:10px}
+.foot-base{display:flex;flex-direction:column;gap:2px;font-size:12px;letter-spacing:.04em;color:rgba(243,228,226,.75)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .split,.farm .split,.flower .split,.people .split,.fleet .split{grid-template-columns:1fr;gap:28px}
+  .split .art{aspect-ratio:auto;order:-1;max-height:none}
+  .flower .art img{max-height:300px}
+  .farm .copy h2,.flower .copy h2,.people .copy h2,.quote-text h2,.fleet h2{font-size:clamp(34px,9vw,48px)}
+  .section{padding:clamp(48px,8vw,80px) var(--gutter)}
+  .testimonial .inner{grid-template-columns:1fr;gap:0}
+  .testimonial .portrait{order:-1;justify-content:flex-end}
+  .testimonial .portrait img{max-width:260px}
+  .testimonial blockquote{padding-bottom:40px}
+  .chain{grid-template-columns:1fr;border-top:0;margin-top:24px}
+  .chain li{border-right:0;border-top:1px solid rgba(250,246,242,.14);padding:20px 0 20px}
+  .chain li::before{display:none}
+  .chain time{font-size:36px;margin-bottom:6px}
+  .head-left span.menu-label{display:none}
+  .head-right .phone-label{display:none}
+  .hero-tag{top:auto;bottom:clamp(120px,22vw,220px)}
+}
+@media (max-width:600px){
+  /* header */
+  .site-head{padding:14px var(--gutter)}
+  .logo{height:44px}
+  .head-right{font-size:11px}
+  /* hero: taller crop, name wraps, tagline tucked above it */
+  .hero{min-height:560px}
+  .hero-media video,.hero-media img{object-position:62% 60%}
+  .hero-name{font-size:15.5vw;white-space:normal;padding:0 12px;bottom:28px;line-height:.9;letter-spacing:-.01em}
+  .hero-name small{font-size:11px;letter-spacing:.3em;margin-top:1em}
+  .hero-tag{bottom:auto;top:120px;font-size:11px;line-height:1.7}
+  .scroll-cue{display:none}
+  /* sliders: narrower cards, no U-curve drop space */
+  .slider{padding:36px 0 24px}
+  .rail{gap:18px;padding:0 var(--gutter) 40px}
+  .card{flex-basis:78vw;height:auto;min-height:380px}
+  .card p{padding:18px 18px 14px;font-size:15px}
+  /* numbers: no sticky scroll — static globe behind the figures */
+  .globe-sec{height:auto;padding:56px 0 48px}
+  .globe-sticky{position:static;height:auto;overflow:visible;display:block}
+  .globe{position:absolute;left:50%;top:50%;width:150vw;transform:translate3d(-50%,-50%,0)!important;opacity:.28;pointer-events:none}
+  .globe-sec{position:relative;overflow:hidden}
+  .tracks{display:none}
+  .stats{grid-template-columns:1fr 1fr;gap:28px 18px}
+  .stats strong{font-size:30px}
+  .stats div:not(:nth-child(3n+1))::before{display:none}
+  /* journey band: shorter, text top-right */
+  .quote{min-height:220px;padding:28px var(--gutter)}
+  .quote-text{max-width:60%}
+  /* contact: truck as a short band on top, form in a clean white block below */
+  .contact{background:#fff;min-height:0;padding:0;display:block}
+  .contact::before{content:"";display:block;height:48vw;background:#fff url("assets/truck.png") center / cover no-repeat;background-position:28% center}
+  .contact .panel{width:100%;margin:0;padding:28px var(--gutter) 48px}
+  .contact .panel h2,.contact .panel p,.contact address{text-shadow:none}
+  form{grid-template-columns:1fr;gap:14px}
+  .btn{width:100%;justify-self:stretch;text-align:center}
+  /* footer */
+  .foot-top{flex-direction:column;gap:28px}
+  .foot-right{align-items:flex-start}
+  .foot-contact{text-align:left}
+  .foot-name{font-size:15.5vw;margin-top:40px;letter-spacing:-.02em}
+  /* menu */
+  .menu li{font-size:clamp(26px,8vw,36px);line-height:1.5}
+}
+[dir="rtl"] .hero-tag{left:auto;right:var(--gutter);text-align:right}
+[dir="rtl"] .scroll-cue{left:auto;right:var(--gutter)}
+[dir="rtl"] .lang-list{left:auto;right:-10px}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-head" id="siteHead">
+  <div class="head-left">
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
+      <span class="bars" aria-hidden="true"></span>
+      <span class="menu-label" data-i18n="menu">Menu</span>
+    </button>
+    <div class="lang">
+      <button class="lang-btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false"><span id="langCur">EN</span></button>
+      <ul class="lang-list" id="langList" role="listbox">
+        <li><button data-lang="en" aria-current="true">English</button></li>
+        <li><button data-lang="sw">Kiswahili</button></li>
+        <li><button data-lang="ur">اردو</button></li>
+      </ul>
+    </div>
+  </div>
+  <a class="logo" href="#top" aria-label="Bloomingdale Roses home"><img src="assets/logo.png" alt=""></a>
+  <div class="head-right">
+    <a href="tel:+254700000000"><span class="phone-label">Call us&nbsp;&nbsp;</span>+254 700 000 000</a>
+  </div>
+</header>
+
+<nav class="menu" id="menu" aria-label="Main">
+  <ul>
+    <li><a href="#farm" data-i18n="nav_farm">The farm</a></li>
+    <li><a href="#news" data-i18n="nav_news">Who we are</a></li>
+    <li><a href="#flower" data-i18n="nav_flower">The flower</a></li>
+    <li><a href="#varieties" data-i18n="nav_varieties">Varieties</a></li>
+    <li><a href="#people" data-i18n="nav_people">The people</a></li>
+    <li><a href="#fleet" data-i18n="nav_chain">From bloom to bouquet</a></li>
+    <li><a href="#journey" data-i18n="nav_fleet">The journey</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Rose cursor: ten photos of the same rose from bud to bloom; crossfades through them as you scroll (desktop only) -->
+<div class="rose-cursor" id="roseCursor" aria-hidden="true">
+  <div class="frames">
+    <img loading="lazy" src="assets/cursor/r1.png" alt="">
+    <img loading="lazy" src="assets/cursor/r2.png" alt="">
+    <img loading="lazy" src="assets/cursor/r3.png" alt="">
+    <img loading="lazy" src="assets/cursor/r4.png" alt="">
+    <img loading="lazy" src="assets/cursor/r5.png" alt="">
+    <img loading="lazy" src="assets/cursor/r6.png" alt="">
+    <img loading="lazy" src="assets/cursor/r7.png" alt="">
+    <img loading="lazy" src="assets/cursor/r8.png" alt="">
+    <img loading="lazy" src="assets/cursor/r9.png" alt="">
+    <img loading="lazy" src="assets/cursor/r10.png" alt="">
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero" aria-label="Bloomingdale Roses">
+  <div class="hero-media">
+    <!-- To use a video instead:
+         <video autoplay muted loop playsinline poster="img/hero.jpg"><source src="video/hero.mp4" type="video/mp4"></video> -->
+    <img id="heroImg" src="assets/Golden-Hour Greenhouse Valley.jpg" alt="Aerial view of the Bloomingdale greenhouses in the Kenyan highlands" fetchpriority="high">
+    <div class="hero-shade" aria-hidden="true"></div>
+  </div>
+  <p class="hero-tag" data-i18n="hero_tag">Premium cut roses<br>grown at altitude<br>in the Kenyan highlands</p>
+  <h1 class="hero-name">Bloomingdale<small data-i18n="hero_small">Roses &nbsp;·&nbsp; Kenya</small></h1>
+  <div class="scroll-cue" aria-hidden="true"><span data-i18n="scroll">Scroll</span></div>
+</section>
+
+<!-- ============ 3. THE FARM ============ -->
+<section class="section farm" id="farm">
+  <div class="split">
+    <div class="copy">
+      <h2 data-i18n="farm_h">The <em>farm</em></h2>
+      <p>Our greenhouses sit on the highland plateau north of Nairobi, where cool nights slow the plant down and long, even days give the bloom its colour. Water comes from our own dam, fed by rain, and is recycled through the beds.</p>
+      <p>We grade every stem by hand for head size, stem length and opening stage, then pre-cool it to 2°C within an hour of cutting.</p>
+    </div>
+    <div class="art">
+      <img src="assets/farm.png" alt="Illustrated aerial view of the Bloomingdale farm: greenhouses, pack-house and water dams">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3b. WHO WE ARE (events & press slider) ============ -->
+<section class="slider news" id="news">
+  <header>
+    <h2 data-i18n="news_h">Who we are</h2>
+    <span class="hint" data-i18n="swipe">Swipe or scroll</span>
+  </header>
+  <!-- Photos go in assets/news/ as n1.jpg … n7.jpg. Add or remove cards freely. -->
+  <div class="rail">
+    <a class="card" href="#">
+      <p>What happened, where, and when — a line or two about this event or feature.</p>
+      <figure><img src="assets/news/n1.jpg" alt="" onerror="this.remove()"><figcaption>Event 1</figcaption></figure>
+    </a>
+    <a class="card" href="#">
+      <p>What happened, where, and when — a line or two about this event or feature.</p>
+      <figure><img src="assets/news/n2.jpg" alt="" onerror="this.remove()"><figcaption>Event 2</figcaption></figure>
+    </a>
+    <a class="card" href="#">
+      <p>What happened, where, and when — a line or two about this event or feature.</p>
+      <figure><img src="assets/news/n3.jpg" alt="" onerror="this.remove()"><figcaption>Event 3</figcaption></figure>
+    </a>
+    <a class="card" href="#">
+      <p>What happened, where, and when — a line or two about this event or feature.</p>
+      <figure><img src="assets/news/n4.jpg" alt="" onerror="this.remove()"><figcaption>Event 4</figcaption></figure>
+    </a>
+    <a class="card" href="#">
+      <p>What happened, where, and when — a line or two about this event or feature.</p>
+      <figure><img src="assets/news/n5.jpg" alt="" onerror="this.remove()"><figcaption>Event 5</figcaption></figure>
+    </a>
+    <a class="card" href="#">
+      <p>What happened, where, and when — a line or two about this event or feature.</p>
+      <figure><img src="assets/news/n6.jpg" alt="" onerror="this.remove()"><figcaption>Event 6</figcaption></figure>
+    </a>
+    <a class="card" href="#">
+      <p>What happened, where, and when — a line or two about this event or feature.</p>
+      <figure><img src="assets/news/n7.jpg" alt="" onerror="this.remove()"><figcaption>Event 7</figcaption></figure>
+    </a>
+  </div>
+</section>
+
+<!-- ============ 3c. THE FLOWER ============ -->
+<section class="section flower" id="flower">
+  <div class="split">
+    <div class="copy">
+      <h2 data-i18n="flower_h">The <em>flower</em></h2>
+      <p>Every stem is cut by hand in the early morning at a set opening stage, so it travels tight and opens with the customer. Cool highland nights slow the plant down; long equatorial days give the bloom its depth of colour.</p>
+      <p>We grade by eye for head size, stem length and quality, then hydrate and sleeve each bunch before it goes into the cold room.</p>
+    </div>
+    <div class="art">
+      <img src="assets/flower.png" alt="Illustration of a Bloomingdale rose">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. VARIETIES (card slider) ============ -->
+<section class="slider varieties" id="varieties">
+  <header>
+    <h2 data-i18n="var_h">Varieties</h2>
+    <span class="hint" data-i18n="swipe">Swipe or scroll</span>
+  </header>
+
+  <!-- Each card: short text on top, photo below, name as the label on the photo.
+       Put the photos in assets/varieties/ with the file names below (or edit the src). -->
+  <div class="rail">
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v1.jpg" alt="Variety 1" onerror="this.remove()"><figcaption>Variety 1</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v2.jpg" alt="Variety 2" onerror="this.remove()"><figcaption>Variety 2</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v3.jpg" alt="Variety 3" onerror="this.remove()"><figcaption>Variety 3</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v4.jpg" alt="Variety 4" onerror="this.remove()"><figcaption>Variety 4</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v5.jpg" alt="Variety 5" onerror="this.remove()"><figcaption>Variety 5</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v6.jpg" alt="Variety 6" onerror="this.remove()"><figcaption>Variety 6</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v7.jpg" alt="Variety 7" onerror="this.remove()"><figcaption>Variety 7</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v8.jpg" alt="Variety 8" onerror="this.remove()"><figcaption>Variety 8</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v9.jpg" alt="Variety 9" onerror="this.remove()"><figcaption>Variety 9</figcaption></figure>
+    </a>
+    <a class="card" href="#contact">
+      <p>Colour, head size and a line about this rose go here.</p>
+      <figure><img src="assets/varieties/v10.jpg" alt="Variety 10" onerror="this.remove()"><figcaption>Variety 10</figcaption></figure>
+    </a>
+  </div>
+</section>
+
+<!-- ============ 4b. THE PEOPLE ============ -->
+<section class="section people" id="people">
+  <div class="split">
+    <div class="copy">
+      <h2 data-i18n="people_h">The <em>people</em></h2>
+      <p>Our growers, graders and packers come from the villages around the farm, and many have been with us for more than ten years. They know each variety by eye: when to cut it, how it opens, and how it should be handled.</p>
+      <p>Every bunch is graded, hydrated and sleeved by hand before it goes into the cold room, and the same team is on the pack-house floor when the trucks arrive.</p>
+    </div>
+    <div class="art">
+      <img src="assets/people.png" alt="The Bloomingdale team in the pack-house">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. COLD CHAIN, HOUR BY HOUR ============ -->
+<section class="section fleet" id="fleet">
+  <h2 data-i18n="chain_h">From bloom <em>to bouquet</em></h2>
+  <ol class="chain" id="chain">
+    <li><time data-count="0">0<small>h</small></time><h3>Cut and graded</h3><p>Harvested early morning, graded by hand, into the pre-cooler at 2&nbsp;°C within the hour.</p></li>
+    <li><time data-count="6">0<small>h</small></time><h3>Packed and sleeved</h3><p>Hydrated, sleeved in our own biodegradable sleeves, boxed and palletised in the cold room.</p></li>
+    <li><time data-count="12">0<small>h</small></time><h3>On the road</h3><p>About four hours in refrigerated trucks from Timau to the cargo terminal at Jomo Kenyatta International Airport.</p></li>
+    <li><time data-count="24">0<small>h</small></time><h3>In the air</h3><p>Into the airline's cold store, then roughly eight and a half hours non-stop to Amsterdam, or five to Dubai.</p></li>
+    <li><time data-count="48">0<small>h</small></time><h3>At the buyer</h3><p>On the European market within 24 to 48 hours of cutting, and on to your warehouse.</p></li>
+  </ol>
+</section>
+
+<!-- ============ 4d. GLOBE + NUMBERS ============ -->
+<section class="globe-sec" id="numbers" aria-label="Bloomingdale in numbers">
+  <div class="globe-sticky">
+    <div class="globe" id="globe">
+      <!-- fallback sphere if the photo is missing -->
+      <div class="globe-fallback" aria-hidden="true"></div>
+      <!-- Optional: drop a real earth photo at assets/globe.png and it replaces the drawn sphere -->
+      <img src="assets/globe.webp" alt="" onerror="this.remove()">
+      <!-- Flight tracks from the farm (hub) out to the export markets -->
+      <svg class="tracks" viewBox="0 0 100 100" aria-hidden="true">
+        <!-- Globe = circle centre 50,50 radius 49. Farm hub at 56,72. Each path: start at hub, bow outward, end on the city dot. -->
+        <path style="--d:0"   d="M56 72 C 40 60, 22 40, 31 27"/>
+        <path style="--d:.12" d="M56 72 C 48 50, 30 24, 41 19"/>
+        <path style="--d:.24" d="M56 72 C 70 62, 70 46, 74 40"/>
+        <path style="--d:.36" d="M56 72 C 78 66, 92 44, 86 33"/>
+        <path style="--d:.48" d="M56 72 C 76 76, 96 60, 90 48"/>
+        <circle class="hub" cx="56" cy="72" r="1"/>
+        <circle style="--d:0"   cx="31" cy="27" r=".65"/><text style="--d:0"   x="29" y="25.5" text-anchor="end">Amsterdam</text>
+        <circle style="--d:.12" cx="41" cy="19" r=".65"/><text style="--d:.12" x="43" y="17.5">Frankfurt</text>
+        <circle style="--d:.24" cx="74" cy="40" r=".65"/><text style="--d:.24" x="76" y="38.5">Dubai</text>
+        <circle style="--d:.36" cx="86" cy="33" r=".65"/><text style="--d:.36" x="88" y="31.5">Shanghai</text>
+        <circle style="--d:.48" cx="90" cy="48" r=".65"/><text style="--d:.48" x="92" y="50.5">Tokyo</text>
+        <text style="--d:-.3" x="58" y="75">Timau, Kenya</text>
+      </svg>
+    </div>
+    <div class="stats">
+      <div><strong>2013</strong><span>Founded</span></div>
+      <div><strong>40 ha</strong><span>under roses</span></div>
+      <div><strong>2,450 m</strong><span>above sea level</span></div>
+      <div><strong>34+</strong><span>varieties</span></div>
+      <div><strong>545</strong><span>people on the farm</span></div>
+      <div><strong>5</strong><span>export markets</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. THE JOURNEY — illustration band with the heading ============ -->
+<section class="quote" id="journey" aria-label="The journey">
+  <div class="quote-text">
+    <h2 data-i18n="fleet_h">The <em>journey</em></h2>
+  </div>
+</section>
+
+<!-- ============ 4c. TESTIMONIAL ============ -->
+<section class="testimonial" aria-label="Quote from our director">
+  <div class="inner">
+    <blockquote>
+      <span class="quote-mark" aria-hidden="true">&ldquo;</span>
+      <p>Sustainability is core to our ethos at Bloomingdale. From efficient irrigation and rainwater harvesting to the biodegradable sleeves we make in-house, everything we do on the farm works towards that goal &mdash; and the people who work for us are never put at risk.</p>
+      <cite><b>Riya Bunty Shah</b><span>Marketing and Operations Director, Bloomingdale Roses Kenya</span></cite>
+    </blockquote>
+    <div class="portrait">
+      <img src="assets/ria.png" alt="Riya Bunty Shah, Marketing and Operations Director">
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="panel">
+      <h2 data-i18n="contact_h">Get in touch</h2>
+      <p>Tell us what you need — variety, stem length, volume and destination — and our sales team will come back with availability and a quote.</p>
+      <address>
+        Bloomingdale Roses Ltd<br>
+        P.O. Box 00000, Nairobi, Kenya<br>
+        <a href="mailto:sales@bloomingdaleroses.co.ke">sales@bloomingdaleroses.co.ke</a><br>
+        <a href="tel:+254700000000">+254 700 000 000</a>
+      </address>
+    <form action="#" method="post" onsubmit="event.preventDefault();alert('Draft only — the form will be wired up in WordPress.')">
+      <div class="field"><label for="name">Full name</label><input id="name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="company">Company</label><input id="company" name="company" autocomplete="organization"></div>
+      <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+      <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="field"><label for="country">Destination country</label><input id="country" name="country"></div>
+      <div class="field"><label for="interest">I'm interested in</label>
+        <select id="interest" name="interest"><option>Weekly standing order</option><option>One-off order</option><option>Availability sheet</option><option>Visiting the farm</option><option>Something else</option></select></div>
+      <div class="field full"><label for="msg">Message</label><textarea id="msg" name="message"></textarea></div>
+      <button class="btn" type="submit">Send enquiry</button>
+      <p class="fine">We only use your details to reply to this enquiry.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-foot">
+  <div class="foot-top">
+    <div class="foot-left">
+      <a class="foot-brand" href="#top"><img src="assets/logo.png" alt=""><span>Bloomingdale Roses</span></a>
+      <div class="foot-base">
+        <span>© <span id="yr"></span> Bloomingdale Roses Kenya</span>
+        <span>Privacy &nbsp;&nbsp;&nbsp; Terms of trade</span>
+      </div>
+    </div>
+    <div class="foot-right">
+      <div class="foot-social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.2.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 2.9c-3.8 0-6.9 3.1-6.9 6.9s3.1 6.9 6.9 6.9 6.9-3.1 6.9-6.9S15.8 5.1 12 5.1zm0 11.4a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm7.2-11.7a1.6 1.6 0 1 1-3.2 0 1.6 1.6 0 0 1 3.2 0z"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.4 2H3.6C2.7 2 2 2.7 2 3.6v16.8c0 .9.7 1.6 1.6 1.6h16.8c.9 0 1.6-.7 1.6-1.6V3.6c0-.9-.7-1.6-1.6-1.6zM8 19H5V9h3v10zM6.5 7.7a1.8 1.8 0 1 1 0-3.5 1.8 1.8 0 0 1 0 3.5zM19 19h-3v-4.9c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6V19h-3V9h2.9v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V19z"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg></a>
+      </div>
+      <div class="foot-contact">
+        <a href="mailto:sales@bloomingdaleroses.co.ke">sales@bloomingdaleroses.co.ke</a><br>
+        <a href="tel:+254700000000">+254 700 000 000</a><br>
+        Timau, Meru County, Kenya
+      </div>
+      <div class="foot-lang">
+        <select id="footLang" aria-label="Language">
+          <option value="en">English</option>
+          <option value="sw">Kiswahili</option>
+          <option value="ur">اردو</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="foot-name" aria-hidden="true">Bloomingdale<small>Roses &nbsp;·&nbsp; Kenya</small></div>
+</footer>
+
+<script>
+// ---- Rose cursor: one animation loop moves it and eases the bloom stage; frames crossfade by opacity (GPU)
+const rc=document.getElementById('roseCursor');
+if(rc&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+  const frames=[...rc.querySelectorAll('img')],N=frames.length;
+  frames.forEach(f=>{const i=new Image();i.src=f.src});                      // warm the cache
+  let mx=-200,my=-200,cx=-200,cy=-200,target=0,stage=0,frozen=false,running=false;
+  const gz=document.getElementById('numbers');
+  if(gz){gz.addEventListener('pointerenter',()=>frozen=true);gz.addEventListener('pointerleave',()=>frozen=false)}
+  addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;rc.classList.add('on');start()},{passive:true});
+  document.addEventListener('mouseleave',()=>rc.classList.remove('on'));
+  addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;target=Math.min(1,Math.max(0,scrollY/max))*(N-1);start()},{passive:true});
+  function start(){if(!running){running=true;requestAnimationFrame(tick)}}
+  function tick(){
+    cx+=(mx-cx)*.3;cy+=(my-cy)*.3;
+    rc.style.transform=`translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0)`;
+    if(!frozen)stage+=(target-stage)*.12;                                     // ease toward the scroll stage
+    const i=Math.min(N-2,Math.floor(stage)),mix=stage-i;
+    for(let k=0;k<N;k++){const o=k===i?1-mix*.0:k===i+1?mix:0;if(frames[k]._o!==o){frames[k].style.opacity=o;frames[k]._o=o}}
+    const busy=Math.abs(mx-cx)>.3||Math.abs(my-cy)>.3||Math.abs(target-stage)>.005;
+    running=busy;if(busy)requestAnimationFrame(tick)
+  }
+  document.addEventListener('mouseover',e=>rc.classList.toggle('link',!!e.target.closest('a,button,select,input,textarea,label')));
+}
+
+// ---- Header: solid after hero
+const head=document.getElementById('siteHead');
+const hero=document.querySelector('.hero');
+new IntersectionObserver(([e])=>head.classList.toggle('solid',!e.isIntersecting),{rootMargin:'-80px 0px 0px 0px'}).observe(hero);
+
+// ---- Menu overlay
+const menuBtn=document.getElementById('menuBtn'),menu=document.getElementById('menu');
+menuBtn.addEventListener('click',()=>{const o=menu.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':''});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuBtn.setAttribute('aria-expanded',false);document.body.style.overflow=''}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open'))menuBtn.click()});
+
+// ---- Language switcher (draft: swaps nav + headings; full translations come with the CMS)
+const i18n={
+  en:{menu:'Menu',nav_story:'Our story',nav_farm:'The farm',nav_news:'Who we are',nav_flower:'The flower',nav_varieties:'Varieties',nav_people:'The people',nav_chain:'From bloom to bouquet',nav_fleet:'The journey',nav_contact:'Contact',
+      hero_tag:'Premium cut roses<br>grown at altitude<br>in the Kenyan highlands',hero_small:'Roses &nbsp;·&nbsp; Kenya',scroll:'Scroll',
+      story_h:'Our story',farm_h:'The <em>farm</em>',news_h:'Who we are',flower_h:'The <em>flower</em>',people_h:'The <em>people</em>',var_h:'Varieties',swipe:'Swipe or scroll',fleet_h:'The <em>journey</em>',chain_h:'From bloom <em>to bouquet</em>',contact_h:'Get in touch'},
+  sw:{menu:'Menyu',nav_story:'Hadithi yetu',nav_farm:'Shamba',nav_news:'Sisi ni nani',nav_flower:'Ua',nav_varieties:'Aina',nav_people:'Watu wetu',nav_chain:'Kutoka ua hadi shada',nav_fleet:'Safari',nav_contact:'Wasiliana',
+      hero_tag:'Waridi bora zilizokatwa<br>zinazokuzwa milimani<br>nyanda za juu za Kenya',hero_small:'Waridi &nbsp;·&nbsp; Kenya',scroll:'Sogeza',
+      story_h:'Hadithi yetu',farm_h:'Shamba',news_h:'Sisi ni nani',flower_h:'Ua',people_h:'Watu wetu',var_h:'Aina',swipe:'Telezesha au sogeza',fleet_h:'Safari',chain_h:'Kutoka ua hadi shada',contact_h:'Wasiliana nasi'},
+  ur:{menu:'مینو',nav_story:'ہماری کہانی',nav_farm:'فارم',nav_news:'ہم کون ہیں',nav_flower:'پھول',nav_varieties:'اقسام',nav_people:'ہمارے لوگ',nav_chain:'پھول سے گلدستے تک',nav_fleet:'سفر',nav_contact:'رابطہ',
+      hero_tag:'اعلیٰ معیار کے گلاب<br>بلندی پر اگائے گئے<br>کینیا کے پہاڑی علاقوں میں',hero_small:'گلاب &nbsp;·&nbsp; کینیا',scroll:'نیچے',
+      story_h:'ہماری کہانی',farm_h:'فارم',news_h:'ہم کون ہیں',flower_h:'پھول',people_h:'ہمارے لوگ',var_h:'اقسام',swipe:'سوائپ یا اسکرول کریں',fleet_h:'سفر',chain_h:'پھول سے گلدستے تک',contact_h:'رابطہ کریں'}
+};
+const langBtn=document.getElementById('langBtn'),langList=document.getElementById('langList'),langCur=document.getElementById('langCur');
+langBtn.addEventListener('click',()=>{const o=langList.classList.toggle('open');langBtn.setAttribute('aria-expanded',o)});
+document.addEventListener('click',e=>{if(!e.target.closest('.lang')){langList.classList.remove('open');langBtn.setAttribute('aria-expanded',false)}});
+function setLang(l){
+  const b=langList.querySelector(`[data-lang="${l}"]`);
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(i18n[l][el.dataset.i18n]!==undefined)el.innerHTML=i18n[l][el.dataset.i18n]});
+  document.documentElement.lang=l;document.documentElement.dir=l==='ur'?'rtl':'ltr';
+  langCur.textContent=l.toUpperCase();
+  langList.querySelectorAll('button').forEach(x=>x.removeAttribute('aria-current'));b.setAttribute('aria-current','true');
+  langList.classList.remove('open');langBtn.setAttribute('aria-expanded',false);
+  const fl=document.getElementById('footLang');if(fl)fl.value=l;
+}
+langList.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+document.getElementById('footLang')?.addEventListener('change',e=>setLang(e.target.value));
+
+// ---- Globe: rises from the bottom as you scroll through the section; flight tracks draw as it rises
+const gSec=document.getElementById('numbers'),gEl=document.getElementById('globe');
+if(gSec&&gEl){
+  let gq=false;
+  function globeUpdate(){
+    gq=false;
+    const r=gSec.getBoundingClientRect();
+    if(r.bottom<0||r.top>innerHeight)return;
+    const p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));      // 0 at section start → 1 at end
+    gEl.style.setProperty('--gy',(20-20*p).toFixed(2)+'%');   // start offset: 20% = globe already half over the numbers, 60% = only its top showing, 105% = hidden; always ends at 0% = centred
+    gEl.style.setProperty('--gp',Math.min(1,Math.max(0,(p-.6)/.35)).toFixed(3)); // routes appear once the globe is nearly up
+  }
+  const gQueue=()=>{if(!gq){gq=true;requestAnimationFrame(globeUpdate)}};
+  addEventListener('scroll',gQueue,{passive:true});addEventListener('resize',gQueue);gQueue();
+}
+
+// ---- Cold-chain timeline: hours count up from 0 when the section comes into view
+const chain=document.getElementById('chain');
+if(chain){
+  const io=new IntersectionObserver(([e])=>{
+    if(!e.isIntersecting)return;io.disconnect();
+    chain.querySelectorAll('time').forEach((t,i)=>{
+      const end=+t.dataset.count,small=t.querySelector('small').outerHTML,dur=1400,t0=performance.now()+i*180;
+      (function tick(now){const k=Math.min(1,Math.max(0,(now-t0)/dur)),v=Math.round(end*(1-Math.pow(1-k,3)));t.innerHTML=v+small;if(k<1)requestAnimationFrame(tick)})(performance.now());
+    });
+  },{threshold:.4});
+  io.observe(chain);
+}
+
+// ---- Card sliders (every .rail): U-curve + drag to scroll
+const CURVE_DROP=56;   // px: how far the centre card drops below the edge cards (bigger = deeper U)
+document.querySelectorAll('.rail').forEach(rail=>{
+  const cards=[...rail.querySelectorAll('.card')];let queued=false;
+  function curve(){
+    queued=false;
+    const r=rail.getBoundingClientRect(),mid=r.left+r.width/2,half=r.width/2;
+    cards.forEach(c=>{const b=c.getBoundingClientRect();const d=Math.min(1,Math.abs((b.left+b.width/2-mid)/half));
+      c.style.transform=`translateY(${(CURVE_DROP*(1-d*d)).toFixed(1)}px)`});
+  }
+  const queue=()=>{if(!queued){queued=true;requestAnimationFrame(curve)}};
+  rail.addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue);queue();
+
+  let down=false,sx=0,sl=0,moved=false;
+  rail.addEventListener('pointerdown',e=>{down=true;moved=false;sx=e.clientX;sl=rail.scrollLeft;rail.classList.add('dragging');rail.setPointerCapture(e.pointerId)});
+  rail.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;rail.scrollLeft=sl-dx});
+  ['pointerup','pointercancel'].forEach(ev=>rail.addEventListener(ev,()=>{down=false;rail.classList.remove('dragging')}));
+  rail.addEventListener('click',e=>{if(moved)e.preventDefault()});
+});
+
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
